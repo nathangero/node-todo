@@ -43,21 +43,21 @@ app.put("/todo", (req: Request, res: Response) => {
 app.patch("/todo", (req: Request, res: Response) => {
   // console.log("update todo");
 
-  const timestamp = req.body.timestamp;
+  const index = req.body.index;
   const todoName = req.body.todoName;
   const completed = req.body.completed;
 
-  if (todoName) DB[timestamp][KEY_TODO_TITLE] = todoName; // Edit the todo name if it exists
-  DB[timestamp][KEY_TODO_COMPLETION] = completed;
+  if (todoName) DB[index][KEY_TODO_TITLE] = todoName; // Edit the todo name if it exists
+  DB[index][KEY_TODO_COMPLETION] = completed;
 
-  res.status(200).json(DB[timestamp]);
+  res.status(200).json(DB[index]);
 });
 
 app.delete("/:index", (req: Request, res: Response) => {
   // console.log("delete todo");
 
   const index = parseInt(req.params.index);
-  // console.log("delete todo at timestamp:", timestamp);
+  // console.log("delete todo at index:", index);
 
   delete DB[index];
   res.status(200).json(DB);
